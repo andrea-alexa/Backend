@@ -6,7 +6,7 @@ namespace Backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class PersonaController : Controller
+    public class PersonaController : ControllerBase
     {
         private IPersonaServices _personaServices;
 

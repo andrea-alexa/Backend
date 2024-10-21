@@ -7,7 +7,7 @@ namespace Backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class RandomController : Controller
+    public class RandomController : ControllerBase
     {
         private IRandomServices _singleto;
         private IRandomServices _rScope;
