@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Backend.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
@@ -7,6 +8,14 @@ namespace Backend.Controllers
 
     public class PersonaController : Controller
     {
+        private IPersonaServices _personaServices;
+
+        public PersonaController([FromKeyedServices("personaservices")]IPersonaServices personaServices)
+        {
+            _personaServices = personaServices;
+        }
+
+
         [HttpGet("all")]
         public List<PersonaDatos> Get() => Repository.persona;
 
@@ -26,5 +35,17 @@ namespace Backend.Controllers
 
         [HttpGet("search/{search}")]
         public List<PersonaDatos> Get(string search) => Repository.persona.Where(p => p.name.ToUpper().Contains(search.ToUpper())).ToList();
+
+
+        [HttpPost]
+        public IActionResult Add(PersonaDatos persona)
+        {
+            if (!_personaServices.validate(persona))
+            {
+                return BadRequest();
+            }
+            Repository.persona.Add(persona);
+            return NoContent();
+        }
     }
 }
