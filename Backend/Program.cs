@@ -1,3 +1,4 @@
+using Backend.DTOs;
 using Backend.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +13,8 @@ builder.Services.AddKeyedSingleton<IPersonaServices, PersonaServices2>("personas
 builder.Services.AddKeyedSingleton<IRandomServices, RandomServices>("randomSingleton");
 builder.Services.AddKeyedScoped<IRandomServices, RandomServices>("randomScope");
 builder.Services.AddKeyedTransient<IRandomServices, RandomServices>("randomTransient");
+
+builder.Services.AddScoped<IPostService, PostService>();
 
 
 builder.Services.AddControllers();
